@@ -1,3 +1,6 @@
+mod email;
+mod handlers;
+mod types;
+
 fn main() {
-    println!("Hello, world!");
 }

@@ -23,6 +23,7 @@ tower-sessions.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
 uuid = { workspace = true, features = ["v4", "serde"] }
+lettre.workspace = true
 
 [target.'cfg(windows)'.dependencies]
 pq-sys = { workspace = true, features = ["bundled"] }
