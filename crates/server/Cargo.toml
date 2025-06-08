@@ -1,6 +1,29 @@
 [package]
 name = "server"
 version = "0.1.0"
-edition = "2024"
+edition.workspace = true
+publish.workspace = true
 
 [dependencies]
+anyhow.workspace = true
+argon2.workspace = true
+axum = { workspace = true, features = ["macros"] }
+chrono.workspace = true
+clap = { workspace = true, features = ["derive", "env"] }
+dotenvy.workspace = true
+reqwest = { workspace = true, features = ["json"] }
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
+diesel = { workspace = true, features = ["postgres", "uuid", "chrono"] }
+diesel-async = { workspace = true, features = ["postgres", "deadpool"] }
+diesel_async_migrations.workspace = true
+tokio = { workspace = true, features = ["macros", "rt-multi-thread", "signal"] }
+tower-http = { workspace = true, features = ["cors"] }
+tower-sessions.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+uuid = { workspace = true, features = ["v4", "serde"] }
+
+[target.'cfg(windows)'.dependencies]
+pq-sys = { workspace = true, features = ["bundled"] }
+openssl-sys = { workspace = true, features = ["vendored"] }
