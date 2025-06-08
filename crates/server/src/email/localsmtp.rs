@@ -2,11 +2,12 @@ use anyhow::Result;
 use lettre::{Message, SmtpTransport, Transport};
 use lettre::message::header::ContentType;
 
-pub struct LocalSmtpClient {
+#[derive(Clone)]
+pub struct Client {
     transport: SmtpTransport,
 }
 
-impl LocalSmtpClient {
+impl Client {
     pub fn new(host: &str, port: u16) -> Result<Self> {
         let transport = SmtpTransport::builder_dangerous(host)
             .port(port)
