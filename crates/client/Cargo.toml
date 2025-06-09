@@ -5,16 +5,4 @@ edition = "2024"
 
 [dependencies]
 leptos = { version = "0.8.2", features = ["csr"] }
-web-sys = { version = "0.3", features = [
-  "console",
-  "Document",
-  "Element",
-  "HtmlElement",
-  "MouseEvent",
-  "WheelEvent",
-  "SvgElement",
-  "DomRect",
-  "EventTarget",
-] }
-wasm-bindgen = "0.2"
 console_error_panic_hook = "0.1"
