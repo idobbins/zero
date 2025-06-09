@@ -1,6 +1,6 @@
-use crate::config::MinPasswordLength;
 use crate::schema::users;
 use crate::types::user::User;
+use crate::Config;
 use argon2::{
     Argon2, PasswordHash, PasswordVerifier,
     password_hash::{PasswordHasher, SaltString, rand_core::OsRng},
@@ -24,7 +24,7 @@ pub struct Request {
 
 pub async fn change_password(
     Extension(db): Extension<DbPool>,
-    Extension(min_password_length): Extension<MinPasswordLength>,
+    Extension(config): Extension<Config>,
     session: Session,
     Form(request): Form<Request>,
 ) -> StatusCode {
@@ -36,7 +36,7 @@ pub async fn change_password(
     };
 
     // Validate new password length
-    if request.new_password.len() < min_password_length.0 {
+    if request.new_password.len() < config.min_password_length {
         return StatusCode::BAD_REQUEST;
     }
 

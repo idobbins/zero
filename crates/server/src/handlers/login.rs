@@ -18,7 +18,7 @@ pub struct Request {
 }
 
 pub async fn login(
-    db: Extension<DbPool>,
+    Extension(db): Extension<DbPool>,
     session: Session,
     Form(login): Form<Request>,
 ) -> impl IntoResponse {

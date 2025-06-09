@@ -24,7 +24,7 @@ use tracing::{Level, info};
 
 type DbPool = Pool<AsyncPgConnection>;
 
-#[derive(Parser)]
+#[derive(Parser, Clone)]
 struct Config {
     #[clap(long, env = "ZERO_HOST", default_value = "127.0.0.1")]
     host: String,
@@ -107,6 +107,10 @@ async fn main() -> Result<()> {
         .allow_methods(vec![Method::GET, Method::POST])
         .allow_credentials(true);
 
+    let addr = format!("{}:{}", config.host, config.port);
+    let listener = TcpListener::bind(&addr).await?;
+    info!("Listening on: {}", addr);
+
     let router = Router::new()
         .route("/", get(async || StatusCode::OK))
         .route("/login", post(handlers::login))
@@ -119,17 +123,10 @@ async fn main() -> Result<()> {
         .route("/resend-verification", post(handlers::resend_verification))
         .route("/change-password", post(handlers::change_password))
         .layer(Extension(db))
+        .layer(Extension(config))
         .layer(Extension(email))
-        .layer(Extension(BaseUrl(config.base_url.clone())))
-        .layer(Extension(ClientUrl(config.cors_origin.clone())))
-        .layer(Extension(FromEmail(config.from_email.clone())))
-        .layer(Extension(MinPasswordLength(config.min_password_length)))
         .layer(session_layer)
         .layer(cors);
-
-    let addr = format!("{}:{}", config.host, config.port);
-    let listener = TcpListener::bind(&addr).await?;
-    info!("Listening on: {}", addr);
 
     select! {
         _ = axum::serve(listener, router) => {}

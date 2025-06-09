@@ -1,7 +1,7 @@
-use crate::config::{BaseUrl, ClientUrl, FromEmail, MinPasswordLength};
 use crate::email::localsmtp::Client;
 use crate::schema::users;
 use crate::types::user::{NewUser, User};
+use crate::Config;
 use argon2::{
     Argon2,
     password_hash::{PasswordHasher, SaltString, rand_core::OsRng},
@@ -26,14 +26,11 @@ pub struct Request {
 pub async fn register(
     Extension(db): Extension<DbPool>,
     Extension(client): Extension<Client>,
-    Extension(base_url): Extension<BaseUrl>,
-    Extension(client_url): Extension<ClientUrl>,
-    Extension(from_email): Extension<FromEmail>,
-    Extension(min_password_length): Extension<MinPasswordLength>,
+    Extension(config): Extension<Config>,
     Form(register): Form<Request>,
 ) -> StatusCode {
     // Validate password length
-    if register.password.len() < min_password_length.0 {
+    if register.password.len() < config.min_password_length {
         return StatusCode::BAD_REQUEST;
     }
 
@@ -91,8 +88,8 @@ pub async fn register(
                     send_verification_email(
                         &client,
                         &register.email,
-                        &base_url.0,
-                        &from_email.0,
+                        &config.base_url,
+                        &config.from_email,
                         email_validation_token,
                     );
                     StatusCode::CREATED
@@ -127,8 +124,8 @@ pub async fn register(
                     send_verification_email(
                         &client,
                         &register.email,
-                        &client_url.0,
-                        &from_email.0,
+                        &config.base_url,
+                        &config.from_email,
                         email_validation_token,
                     );
                     StatusCode::CREATED

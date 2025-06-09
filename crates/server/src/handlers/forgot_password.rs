@@ -1,7 +1,7 @@
-use crate::config::{BaseUrl, FromEmail};
 use crate::email::localsmtp::Client;
 use crate::schema::users;
 use crate::types::user::User;
+use crate::Config;
 use axum::http::StatusCode;
 use axum::{Extension, Form};
 use chrono::Utc;
@@ -20,8 +20,7 @@ pub struct Request {
 pub async fn forgot_password(
     Extension(db): Extension<DbPool>,
     Extension(client): Extension<Client>,
-    Extension(base_url): Extension<BaseUrl>,
-    Extension(from_email): Extension<FromEmail>,
+    Extension(config): Extension<Config>,
     Form(request): Form<Request>,
 ) -> StatusCode {
     let mut conn = match db.get().await {
@@ -64,8 +63,8 @@ pub async fn forgot_password(
             send_password_reset_email(
                 &client,
                 &request.email,
-                &base_url.0,
-                &from_email.0,
+                &config.base_url,
+                &config.from_email,
                 password_reset_token,
             );
             StatusCode::OK

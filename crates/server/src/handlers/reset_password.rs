@@ -1,5 +1,6 @@
 use crate::schema::users;
 use crate::types::user::User;
+use crate::Config;
 use argon2::{
     Argon2,
     password_hash::{PasswordHasher, SaltString, rand_core::OsRng},
@@ -22,10 +23,11 @@ pub struct Request {
 
 pub async fn reset_password(
     Extension(db): Extension<DbPool>,
+    Extension(config): Extension<Config>,
     Form(request): Form<Request>,
 ) -> StatusCode {
     // Validate password length
-    if request.password.len() < 12 {
+    if request.password.len() < config.min_password_length {
         return StatusCode::BAD_REQUEST;
     }
 
