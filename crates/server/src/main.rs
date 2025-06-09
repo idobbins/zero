@@ -39,11 +39,7 @@ struct Config {
     )]
     database_url: String,
 
-    #[clap(
-        long,
-        env = "ZERO_BASE_URL",
-        default_value = "http://localhost:3000"
-    )]
+    #[clap(long, env = "ZERO_BASE_URL", default_value = "http://localhost:3000")]
     base_url: String,
 
     #[clap(long, env = "ZERO_LOCAL_SMTP_HOST")]
@@ -52,11 +48,7 @@ struct Config {
     #[clap(long, env = "ZERO_LOCAL_SMTP_PORT")]
     local_smtp_port: u16,
 
-    #[clap(
-        long,
-        env = "ZERO_FROM_EMAIL",
-        default_value = "no-reply@jeddix.com"
-    )]
+    #[clap(long, env = "ZERO_FROM_EMAIL", default_value = "no-reply@jeddix.com")]
     from_email: String,
 
     #[clap(
@@ -81,8 +73,7 @@ async fn main() -> Result<()> {
 
     let config = Config::parse();
 
-    let db_config =
-        AsyncDieselConnectionManager::<AsyncPgConnection>::new(&config.database_url);
+    let db_config = AsyncDieselConnectionManager::<AsyncPgConnection>::new(&config.database_url);
     let db = Pool::builder(db_config).build()?;
     info!("Connected to database");
 

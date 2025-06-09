@@ -1,6 +1,6 @@
+use crate::Config;
 use crate::schema::users;
 use crate::types::user::User;
-use crate::Config;
 use argon2::{
     Argon2, PasswordHash, PasswordVerifier,
     password_hash::{PasswordHasher, SaltString, rand_core::OsRng},

@@ -1,7 +1,7 @@
+use crate::Config;
 use crate::email::localsmtp::Client;
 use crate::schema::users;
 use crate::types::user::User;
-use crate::Config;
 use axum::http::StatusCode;
 use axum::{Extension, Form};
 use chrono::Utc;

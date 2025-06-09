@@ -1,6 +1,6 @@
 use anyhow::Result;
-use lettre::{Message, SmtpTransport, Transport};
 use lettre::message::header::ContentType;
+use lettre::{Message, SmtpTransport, Transport};
 
 #[derive(Clone)]
 pub struct Client {
@@ -9,9 +9,7 @@ pub struct Client {
 
 impl Client {
     pub fn new(host: &str, port: u16) -> Result<Self> {
-        let transport = SmtpTransport::builder_dangerous(host)
-            .port(port)
-            .build();
+        let transport = SmtpTransport::builder_dangerous(host).port(port).build();
         Ok(Self { transport })
     }
 

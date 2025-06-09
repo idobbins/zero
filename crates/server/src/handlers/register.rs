@@ -1,7 +1,7 @@
+use crate::Config;
 use crate::email::localsmtp::Client;
 use crate::schema::users;
 use crate::types::user::{NewUser, User};
-use crate::Config;
 use argon2::{
     Argon2,
     password_hash::{PasswordHasher, SaltString, rand_core::OsRng},
