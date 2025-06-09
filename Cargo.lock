@@ -433,7 +433,14 @@ name = "client"
 version = "0.1.0"
 dependencies = [
  "console_error_panic_hook",
+ "gloo-net",
  "leptos",
+ "leptos_router",
+ "serde",
+ "serde_json",
+ "urlencoding",
+ "wasm-bindgen",
+ "web-sys",
 ]
 
 [[package]]
@@ -1630,6 +1637,43 @@ dependencies = [
  "server_fn_macro",
  "syn",
  "uuid",
+]
+
+[[package]]
+name = "leptos_router"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5d1b70dbd176bd0129e5db0e2ed48b7ff076c1b17cf52bbd0e85dcc3e6b9cbc0"
+dependencies = [
+ "any_spawner",
+ "either_of",
+ "futures",
+ "gloo-net",
+ "js-sys",
+ "leptos",
+ "leptos_router_macro",
+ "once_cell",
+ "or_poisoned",
+ "reactive_graph",
+ "rustc_version",
+ "send_wrapper",
+ "tachys",
+ "thiserror 2.0.12",
+ "url",
+ "wasm-bindgen",
+ "web-sys",
+]
+
+[[package]]
+name = "leptos_router_macro"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8403f583a69812524b98c97f2ed0258771e205cd0f715b1bc6ba5e4f70dcb94b"
+dependencies = [
+ "proc-macro-error2",
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -3454,6 +3498,12 @@ dependencies = [
  "idna",
  "percent-encoding",
 ]
+
+[[package]]
+name = "urlencoding"
+version = "2.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "daf8dba3b7eb870caf1ddeed7bc9d2a049f3cfdfae7cb521b087cc33ae4c49da"
 
 [[package]]
 name = "utf8-width"
