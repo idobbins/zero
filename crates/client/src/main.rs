@@ -46,7 +46,16 @@ fn App() -> impl IntoView {
                 </div>
 
                 // Model switch
-                <div class="px-2 py-1 flex mr-auto items-center gap-1 text-white bg-black">
+                <div class="relative  flex mr-auto items-center gap-1 text-white bg-black h-10">
+                    <div class="absolute flex flex-col bg-black -left-64 w-64 -top-64 h-64 justify-between">
+                        <div class="px-2 py-1 hover:bg-gray-600">"Gemini 2.5 Flash"</div>
+                        <div class="px-2 py-1 hover:bg-gray-600">"Gemini 2.5 Pro"</div>
+                        <div class="px-2 py-1 hover:bg-gray-600">"o4-mini"</div>
+                        <div class="px-2 py-1 hover:bg-gray-600">"Claude 4 Sonnet"</div>
+                        <div class="px-2 py-1 hover:bg-gray-600">"Claude 4 Sonnet (Reasoning)"</div>
+                        <div class="px-2 py-1 hover:bg-gray-600">"Deepseek R1 (Lambda Distilled)"</div>
+                    </div>
+
                     <svg class="w-[18px] h-[18px] text-white dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/>
                     </svg>
