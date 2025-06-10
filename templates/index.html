@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Zero App{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/pages/home.css">
+{% endblock %}
+
+{% block content %}
+<div class="home-container">
+    <div class="home-content">
+        <h1 class="home-title">Welcome to Zero</h1>
+        <p class="home-subtitle">A modern Rust web application with Askama templates and Axum</p>
+        <button class="home-cta btn" data-action="get-started">Get Started</button>
+    </div>
+</div>
+{% endblock %}

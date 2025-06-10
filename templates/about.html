@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}About - {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>About {{ app_name }}</h1>
+    <p>Learn more about our modern web application built with Rust, Axum, and Askama templating.</p>
+</div>
+
+<div class="content">
+    <div class="card">
+        <h2>🚀 Version</h2>
+        <p>Current version: <strong>{{ version }}</strong></p>
+    </div>
+    
+    <div class="card">
+        <h2>🛠️ Technology Stack</h2>
+        <ul>
+            <li><strong>Rust</strong> - Systems programming language</li>
+            <li><strong>Axum</strong> - Modern web framework</li>
+            <li><strong>Askama</strong> - Type-safe templating</li>
+            <li><strong>HTMX</strong> - Dynamic web interactions</li>
+        </ul>
+    </div>
+    
+    <div class="card">
+        <h2>✨ Features</h2>
+        <ul>
+            <li>Auto-route registration with proc macros</li>
+            <li>Compile-time route collection</li>
+            <li>Type-safe templates</li>
+            <li>Modular handler organization</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
